@@ -1,0 +1,23 @@
+digraph SystemArchitecture {
+    // Graph styling
+    graph [rankdir=LR, fontname="Arial", splines=polyline, overlap=false];
+    node [shape=box, style="rounded,filled", fontname="Arial", fontsize=12, fillcolor=lightblue];
+    edge [fontname="Arial", fontsize=10];
+    
+    // Nodes
+    ClientGateway [label="Client Gateway"];
+    ConfigService [label="Configuration Service"];
+    TransactionsService [label="Transactions Service"];
+    GnosisSafeUI [label="Gnosis Safe UI"];
+    TracingNode [label="Tracing Node"];
+    SignalBotCoordination [label="SignalBot Coordination"];
+    
+    // Connections
+    ClientGateway -> ConfigService [label="Fetches configs"];
+    ClientGateway -> TransactionsService [label="Submits transactions"];
+    GnosisSafeUI -> ClientGateway [label="API calls"];
+    TransactionsService -> TracingNode [label="Transaction monitoring"];
+    TracingNode -> SignalBotCoordination [label="Sends signals"];
+    SignalBotCoordination -> TransactionsService [label="Initiates transactions"];
+    ConfigService -> TransactionsService [label="Provides settings"];
+}
